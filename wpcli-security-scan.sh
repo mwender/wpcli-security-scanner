@@ -31,8 +31,6 @@ fi
 # Load the configuration
 source $PWD/wpcli-security-scan-config.sh
 
-SITESTORE=/srv/users/serverpilot/apps
-
 SITELIST=($(ls -lh $SITESTORE | awk '{print $9}'))
 
 function wpcli_scan_alert_mail {
