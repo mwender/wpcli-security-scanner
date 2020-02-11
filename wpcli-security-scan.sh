@@ -39,7 +39,7 @@ function wpcli_scan_alert_mail {
 }
 
 for SITE in ${SITELIST[@]}; do
-	cd $SITESTORE/$SITE/public
+	cd $SITESTORE/$SITE$SITEPATH
 
 	printf "\n----------------------------------------\nVerifying ${ORANGE}$SITE${NC}\n----------------------------------------\n"
 	
