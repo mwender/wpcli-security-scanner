@@ -43,15 +43,15 @@ for SITE in ${SITELIST[@]}; do
 
 	printf "\n----------------------------------------\nVerifying ${ORANGE}$SITE${NC}\n----------------------------------------\n"
 	
-	if ! $(wp core is-installed 2>/dev/null); then
-		printf "${ORANGE}NOTE:${NC} $SITE is not a WordPress install, continuing with next site...\n"
+	if ! $(wp core is-installed --allow-root 2>/dev/null); then
+		printf "${ORANGE}NOTE:${NC} $SITE is not a WordPress install (${SITESTORE}/${SITE}${SITEPATH}), continuing with next site...\n"
 		continue
 	fi
 
-	SITEURL=$(wp option get siteurl)
+	SITEURL=$(wp option get siteurl --allow-root)
 
-	if ! $(wp core verify-checksums &>/dev/null); then
-		OUTPUT=$(wp core verify-checksums 2>&1; printf x); OUTPUT=${OUTPUT%x}
+	if ! $(wp core verify-checksums --allow-root &>/dev/null); then
+		OUTPUT=$(wp core verify-checksums --allow-root 2>&1; printf x); OUTPUT=${OUTPUT%x}
 		wpcli_scan_alert_mail | mail -s "$SITE WPCLI Scan Alert" "$ADMIN"
 	fi	
 
