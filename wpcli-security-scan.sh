@@ -38,6 +38,10 @@ function wpcli_scan_alert_mail {
 	echo -e $OUTPUT
 }
 
+function wpcli_finished {
+	echo -e "WPCLI Security Scan has completed. If there were any issues, you should have received separate emails for each vhost prior to this email."
+}
+
 for SITE in ${SITELIST[@]}; do
 	cd $SITESTORE/$SITE$SITEPATH
 
@@ -55,7 +59,6 @@ for SITE in ${SITELIST[@]}; do
 		wpcli_scan_alert_mail | mail -s "$SITE WPCLI Scan Alert" "$ADMIN"
 	fi	
 
-	#wp checksum core
-
- 	#wp core check-update --skip-plugins --skip-themes
 done
+
+wpcli_finished | mail -s "WPCLI Scan Finished" "$ADMIN"
