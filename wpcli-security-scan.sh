@@ -12,9 +12,9 @@
 #
 # - ADMIN=admin-email@example.com
 # - SITESTORE=/path/to/vhosts
+# - SITEPATH=/path/to/webroot
+# - SERVER=web1.example.com
 #
-
-
 
 ORANGE='\033[0;33m'
 NC='\033[0m'
@@ -61,4 +61,4 @@ for SITE in ${SITELIST[@]}; do
 
 done
 
-wpcli_finished | mail -s "WPCLI Scan Finished" "$ADMIN"
+wpcli_finished | mail -s "$SERVER WPCLI Scan Finished" "$ADMIN"
